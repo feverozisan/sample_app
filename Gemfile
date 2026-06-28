@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "4.0.5"
 
 # Rails本体
-gem "rails", "~> 7.2.2"
+gem "rails", "~> 8.1.3"
 
 # データベース (チュートリアル2章用)
 gem "sqlite3", ">= 1.6.1"
