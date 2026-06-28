@@ -22,9 +22,10 @@ gem "importmap-rails"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem "minitest"
+  gem "minitest", "~> 5.25"
 end
 
 group :development do
   gem "web-console"
 end
+
