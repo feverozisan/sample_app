@@ -18,11 +18,13 @@ gem "stimulus-rails"
 gem "turbo-rails"
 # この1行を追加します
 gem "importmap-rails"
+gem "sprockets-rails"
+
 
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem "minitest"
+  gem "minitest", "~> 5.0"
 end
 
 group :development do

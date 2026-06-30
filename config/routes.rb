@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   Rails.application.routes.draw do
-    root "application#hello"
-  end
+  get 'static_pages/home'
+  get 'static_pages/help'
+  get 'static_pages/about'
+  # 演習1を終わらせている場合は、以下の1行もあるはずです
+  get 'static_pages/contact' 
+
+  root 'static_pages#home'
+end
 end
