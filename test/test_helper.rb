@@ -12,4 +12,12 @@ module ActiveSupport
 
     # Add more helper methods to be used by all tests here...
   end
+
+  class ActiveSupport::TestCase
+    # 指定のワーカー数でテストを並列実行する
+    parallelize(workers: :number_of_processors)
+    # test/fixtures/*.yml のfixture をすべてセットアップする
+    fixtures :all
+    include ApplicationHelper
+  end
 end

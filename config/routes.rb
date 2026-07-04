@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "users/new"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -12,12 +13,16 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   Rails.application.routes.draw do
-  get 'static_pages/home'
-  get 'static_pages/help'
-  get 'static_pages/about'
-  # 演習1を終わらせている場合は、以下の1行もあるはずです
-  get 'static_pages/contact' 
-
-  root 'static_pages#home'
+  get "users/new"
+  #get 'static_pages/home'
+  #get 'static_pages/help'
+  #get 'static_pages/about'
+  #get 'static_pages/contact' 
+  #root 'static_pages#home'
+  root "static_pages#home"
+  get '/signup', to: 'users#new'
+  get "/help", to: "static_pages#help", as: 'helf'
+  get "/about", to: "static_pages#about"
+  get "/contact", to: "static_pages#contact"
 end
 end

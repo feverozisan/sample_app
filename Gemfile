@@ -19,7 +19,9 @@ gem "turbo-rails"
 # この1行を追加します
 gem "importmap-rails"
 gem "sprockets-rails"
-
+gem "bootstrap-sass"
+gem "sassc-rails"
+gem 'rails-controller-testing'
 
 
 group :development, :test do
