@@ -21,6 +21,7 @@ gem "importmap-rails"
 gem "sprockets-rails"
 gem "bootstrap-sass"
 gem "sassc-rails"
+gem "bcrypt"
 gem 'rails-controller-testing'
 
 
