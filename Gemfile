@@ -24,6 +24,9 @@ gem "sassc-rails"
 gem "bcrypt"
 gem 'rails-controller-testing'
 
+group :production do
+gem "pg","1.3.5"
+end
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
