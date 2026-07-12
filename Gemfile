@@ -25,7 +25,7 @@ gem "bcrypt"
 gem 'rails-controller-testing'
 
 group :production do
-gem "pg","1.3.5"
+gem "pg","1.6.3"
 end
 
 group :development, :test do
