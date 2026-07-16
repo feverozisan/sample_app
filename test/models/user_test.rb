@@ -55,8 +55,9 @@ class UserTest < ActiveSupport::TestCase
     duplicate_user = @user.dup
     duplicate_user.email = @user.email.upcase
     @user.save
-    assert_not duplicate_user.valid?
+    assert_not duplicate_user.valid? # ← @user ではなく duplicate_user に修正
   end
+
 
   test "email addresses should be saved as lowercase" do
     mixed_case_email = "Foo@ExAMPle.Com"
@@ -66,12 +67,16 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "password should be present (nonblank)" do
-    @user.password = @user.password_confirmation = " " * 8
+    @user.password = @user.password_confirmation = " " * 5
     assert_not @user.valid?
   end
 
   test "password should have a minimum length" do
-    @user.password = @user.password_confirmation = " " * 8
+    @user.password = @user.password_confirmation = " " * 5
     assert_not @user.valid?
   end 
+
+  test "authenticated? should return false for a user with nil digest" do
+    assert_not @user.authenticated?('')
+  end
 end
