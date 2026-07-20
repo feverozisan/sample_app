@@ -22,6 +22,8 @@ gem "sprockets-rails"
 gem "bootstrap-sass"
 gem "sassc-rails"
 gem "bcrypt"
+gem "faker"
+gem "will_paginate"
 gem 'rails-controller-testing'
 
 group :production do

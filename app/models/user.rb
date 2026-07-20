@@ -20,9 +20,10 @@ class User < ApplicationRecord
 
   # セキュアなパスワード機能を追加（password, password_confirmation の自動追加、authenticateメソッドの有効化）
   has_secure_password
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   
   # パスワードのバリデーション（空でないこと、6文字以上であること）
-  validates :password, presence: true, length: { minimum: 6 }
+  #validates :password, presence: true, length: { minimum: 6 }
 
   # 渡されたトークンがダイジェストと一致したらtrue を返す
   def authenticated?(remember_token)

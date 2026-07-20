@@ -4,18 +4,23 @@ class SessionsController < ApplicationController
   end
 
   def create
-    # ⭕ `?user` になっていた場所をすべて `@user` に修正
     @user = User.find_by(email: params[:session][:email].downcase)
     if @user && @user.authenticate(params[:session][:password])
+      # 1. 転送先URLをあらかじめ退避させる
+      forwarding_url = session[:forwarding_url]
+      
+      # 2. セッションをリセット
       reset_session
       
-      # ⭕ Remember me のチェックボックスによる条件分岐
+      # 3. ログインと永続化処理
+      log_in @user
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
       
-      log_in @user
-      redirect_to @user
+      # 4. 退避させていたURLへリダイレクトし、セッションを削除する
+      # ※ reset_session の後に代入し直すことで安全に機能させます
+      session[:forwarding_url] = forwarding_url
+      redirect_back_or @user
     else
-      # ❌ ログイン失敗時：エラーメッセージを出して、ログイン画面を再表示する
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new', status: :unprocessable_entity
     end
