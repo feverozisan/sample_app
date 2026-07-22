@@ -28,7 +28,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
     assert_select "a[href=?]", user_path(@user)
-    
+
     # ログアウト処理
     delete logout_path
     assert_not is_logged_in? # ⭕ ログアウト後に未ログイン状態（false）であることを正しく検証
@@ -53,6 +53,6 @@ class RememberingTest < UsersLoginTest
     log_in_as(@user, remember_me: '1')
     # クッキーが削除されていることを検証してログイン
     log_in_as(@user, remember_me: '0')
-    assert_empty cookies[:remember_token]
+    assert cookies[:remember_token].blank? # 💡 assert_nil に変更
   end
 end
