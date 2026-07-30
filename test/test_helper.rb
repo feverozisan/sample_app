@@ -4,27 +4,21 @@ require "rails/test_help"
 
 module ActiveSupport
   class TestCase
-    # Run tests in parallel with specified workers
-    parallelize(workers: :number_of_processors)
+    # 指定のワーカー数でテストを並列実行する（1に制限して競合を防ぐ）
+    parallelize(workers: 1)
 
-    # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+    # test/fixtures/*.yml の fixture をすべてセットアップする
     fixtures :all
 
-    # Add more helper methods to be used by all tests here...
-  end
-
-  class ActiveSupport::TestCase
-    # 指定のワーカー数でテストを並列実行する
-    #parallelize(workers: :number_of_processors)
-    # test/fixtures/*.yml のfixture をすべてセットアップする
-    fixtures :all
+    # ヘルパーをインクルード
     include ApplicationHelper
-    # テストユーザーがログイン中の場合にtrue を返す
+
+    # テストユーザーがログイン中の場合に true を返す
     def is_logged_in?
       !session[:user_id].nil?
     end
 
-    # テストユーザーとしてログインする
+    # テストユーザーとしてログインする（コントローラーテスト用）
     def log_in_as(user)
       session[:user_id] = user.id
     end
@@ -32,11 +26,16 @@ module ActiveSupport
 end
 
 class ActionDispatch::IntegrationTest
-  
-  # テストユーザーとしてログインする
+  # テストユーザーとしてログインする（インテグレーションテスト用）
   def log_in_as(user, password: 'password', remember_me: '1')
     post login_path, params: { session: { email: user.email,
                                           password: password,
                                           remember_me: remember_me } }
   end
+end
+
+# test/test_helper.rb
+class ActiveSupport::TestCase
+  # fixtures :all
+  include ActionDispatch::TestProcess::FixtureFile
 end

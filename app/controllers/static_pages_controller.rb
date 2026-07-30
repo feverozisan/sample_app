@@ -1,5 +1,11 @@
 class StaticPagesController < ApplicationController
+
   def home
+    if logged_in?
+      @micropost  = current_user.microposts.build
+      # 🔵 必ず if の中（end の前）に記述します
+      @feed_items = current_user.feed.paginate(page: params[:page])
+    end
   end
 
   def help

@@ -5,7 +5,18 @@ class ApplicationController < ActionController::Base
 
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
-   def hello
+  def hello
     render html: "hello, world!"
-   end
+  end
+
+  private
+
+    # ユーザーのログインを確認する
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url, status: :see_other
+      end
+    end
 end
