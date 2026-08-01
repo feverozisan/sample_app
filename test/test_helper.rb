@@ -10,15 +10,16 @@ module ActiveSupport
     # test/fixtures/*.yml の fixture をすべてセットアップする
     fixtures :all
 
-    # ヘルパーをインクルード
+    # ヘルパーとファイルアップロード用モジュールを安全にインクルード
     include ApplicationHelper
+    include ActionDispatch::TestProcess::FixtureFile
 
     # テストユーザーがログイン中の場合に true を返す
     def is_logged_in?
       !session[:user_id].nil?
     end
 
-    # テストユーザーとしてログインする（コントローラーテスト用）
+    # テストユーザーとしてログインする（単体テスト・コントローラーテスト用）
     def log_in_as(user)
       session[:user_id] = user.id
     end
@@ -32,10 +33,4 @@ class ActionDispatch::IntegrationTest
                                           password: password,
                                           remember_me: remember_me } }
   end
-end
-
-# test/test_helper.rb
-class ActiveSupport::TestCase
-  # fixtures :all
-  include ActionDispatch::TestProcess::FixtureFile
 end
