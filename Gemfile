@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "4.0.5"
 
 # Rails本体
-gem "rails", "~> 7.2.2"
+gem "rails", "~> 8.1.3"
 gem "image_processing","1.12.2"
 gem 'active_storage_validations', '0.9.8' # バージョンはチュートリアルの指定に合わせてください
 # データベース (チュートリアル2章用)
