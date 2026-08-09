@@ -28,7 +28,7 @@ gem "will_paginate"
 gem 'rails-controller-testing'
 
 group :production do
-  gem "aws-sdk-s3","1.114.0", require: false
+  gem "aws-sdk-s3","1.228.2", require: false
 end
 
 group :development, :test do
