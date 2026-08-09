@@ -4,7 +4,7 @@ ruby "4.0.5"
 
 # Rails本体
 gem "rails", "~> 7.2.2"
-gem "image_processing","1.12.2"
+gem "image_processing","2.0.3"
 gem 'active_storage_validations', '0.9.8' # バージョンはチュートリアルの指定に合わせてください
 # データベース (チュートリアル2章用)
 gem "sqlite3", ">= 1.6.1"
